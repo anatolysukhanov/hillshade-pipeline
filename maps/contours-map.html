@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Contours</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css'/>
+    <script src='https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js'></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    const map = new maplibregl.Map({
+        container: 'map', // container id
+        style: 'https://demotiles.maplibre.org/style.json', // style URL
+        center: [-111.0406165234276, 43.18107717000376],
+        zoom: 11.2,
+        maplibreLogo: true
+    });
+
+    map.on('load', () => {
+        map.addSource("contours", {
+            "type": "vector",
+            "tiles": [
+                "http://localhost:8080/data/contours/{z}/{x}/{y}.pbf"
+            ],
+            "minzoom": 6,
+            "maxzoom": 14
+        });
+
+        map.addLayer({
+            id: 'contours-layer',
+            type: 'line',
+            source: 'contours',
+            "source-layer": 'contours',
+            paint: {
+                'line-color': 'red',
+                'line-width': 1
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

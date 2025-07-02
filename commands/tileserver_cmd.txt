@@ -1,1 +1,2 @@
 tileserver-gl hillshade.mbtiles
+tileserver-gl contours.mbtiles
