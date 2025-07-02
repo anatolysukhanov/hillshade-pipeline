@@ -1,0 +1,28 @@
+{
+  "id": "hillshade",
+  "type": "fill",
+  "source": "hillshade",
+  "paint": {
+    "fill-color": [
+      "match",
+      [
+        "get",
+        "shade"
+      ],
+      0,
+      "#f8f8f8",
+      1,
+      "#e2e2e2",
+      2,
+      "#c8c8c8",
+      3,
+      "#a5a5a5",
+      4,
+      "#7a7a7a",
+      5,
+      "#525252",
+      "#000000"
+    ],
+    "fill-opacity": 0.75
+  }
+}

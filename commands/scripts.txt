@@ -1,0 +1,1 @@
+python hillshade_to_polygons.py --dem AW3D30.tif --out hillshade.geojson --bands 8 --sigma 1.8 --min_pixels 3

@@ -1,0 +1,1 @@
+tippecanoe -o hillshade.mbtiles -l hillshade --minimum-zoom=6 --maximum-zoom=14 --detect-shared-borders --simplify-only-low-zooms hillshade.geojson
