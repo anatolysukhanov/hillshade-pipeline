@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contour Polygons</title>
+    <meta property="og:description" content="Initialize a map in an HTML element with MapLibre GL JS."/>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css'/>
+    <script src='https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js'></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    const map = new maplibregl.Map({
+        container: 'map', // container id
+        style: 'https://demotiles.maplibre.org/style.json', // style URL
+        center: [-111.0406165234276, 43.18107717000376],
+        zoom: 11.2,
+        maplibreLogo: true
+    });
+
+    map.on('load', () => {
+        map.addSource("contours", {
+            "type": "vector",
+            "tiles": [
+                "http://localhost:8080/data/contour_polygons/{z}/{x}/{y}.pbf"
+            ],
+            "minzoom": 6,
+            "maxzoom": 14
+        });
+
+        map.addLayer({
+            id: "contours-fill",
+            type: "fill",
+            source: "contours",
+            "source-layer": "contour_polygons",
+            paint: {
+                "fill-color": [
+                    "interpolate", ["linear"], ["get", "elev_min"],
+                    /* elev_min, colour */
+                    1600, "#d9ef8b",
+                    1800, "#a6d96a",
+                    2000, "#66bd63",
+                    2200, "#fee08b",
+                    2400, "#f6c67a",
+                    2600, "#d8b365",
+                    2800, "#b4a393",
+                    3000, "#f0f0f0"
+                ],
+                "fill-opacity": 0.6
+            }
+        });
+    });
+</script>
+</body>
+</html>

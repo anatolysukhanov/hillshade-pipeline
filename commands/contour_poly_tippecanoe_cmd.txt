@@ -1,0 +1,4 @@
+tippecanoe -o contour_polygons.mbtiles -l contour_polygons \
+           --minimum-zoom=6 --maximum-zoom=14 \
+           --detect-shared-borders \
+           contour_polygons_smooth.geojson
